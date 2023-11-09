@@ -1,0 +1,7 @@
+[error] C:\Users\Administrator\Desktop\금예빈\7.서버 통합 구현\Sprinboots_study\project\project\src\main\java\org\bebeaubn\ProjectApplication.java:3:1: package org.springframework.boot does not exist
+[error] org.springframework.boot.SpringApplication
+[error] C:\Users\Administrator\Desktop\금예빈\7.서버 통합 구현\Sprinboots_study\project\project\src\main\java\org\bebeaubn\ProjectApplication.java:4:1: package org.springframework.boot.autoconfigure does not exist
+[error] org.springframework.boot.autoconfigure.SpringBootApplication
+[error] C:\Users\Administrator\Desktop\금예빈\7.서버 통합 구현\Sprinboots_study\project\project\src\main\java\org\bebeaubn\ProjectApplication.java:6:1: cannot find symbol
+[error]   symbol: class SpringBootApplication
+[error] SpringBootApplication

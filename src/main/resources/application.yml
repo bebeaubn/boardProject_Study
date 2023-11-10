@@ -2,6 +2,10 @@ server:
   port: 3000
 
 spring:
+  #프로필 설정
+  profiles:
+    active: dev
+
   #데이터베이스 설정
   datasource:
     driverClassName: oracle.jdbc.driver.OracleDriver
@@ -9,6 +13,33 @@ spring:
     username: PROJECT
     password: _aA123456
 
+  #파일 업로드 설정
+  servlet:
+    multipart:
+      maxFileSize: 20MB
+      maxRequestSize: 40MB
+
+  #정적 자원 설정(CSS, JS, 이미지)
+  resources:
+    staticLocations: file:src/main/resources/static
+
+
+  #라이브 리로드 설정
+  devtools:
+    livereload:
+      enabled: true
+
+  #타임리프
+  thymeleaf:
+    cached: false
+    prefix: file:src/main/resources/templates/
+
+
+
+file:
+  upload:
+    path: C:/uploads/
+    url: /uploads/
 
   #로거 설정
   logging:

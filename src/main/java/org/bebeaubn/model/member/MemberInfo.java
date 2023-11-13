@@ -2,6 +2,7 @@ package org.bebeaubn.model.member;
 
 import lombok.Builder;
 import lombok.Data;
+import org.bebeaubn.entities.Member;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -9,19 +10,27 @@ import java.util.Collection;
 @Data @Builder
 
 public class MemberInfo implements UserDetails {
+
+    private String email;
+    private String password;
+
+    private Member member;
+
+    private Collection<? extends GrantedAuthority> authorities;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return authorities;
     }
 
     @Override
     public String getPassword() {
-        return null;
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return email;
     }
 
     @Override

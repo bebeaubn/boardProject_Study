@@ -7,12 +7,17 @@
     <form method="post" th:action="@{/member/login}">
         <input th:if="${redirectURL != null}" type="hidden" name="redirectURL">
         <div class="rows">
-            <input type="text" name="email" th:placeholder="#{이메일}">
+            <input type="text" name="email" th:placeholder="#{이메일}" th:valu="${session.email}">
+            <div class="error" th:if="${session.NotBlank_email != null}" th:text="${session.NotBlank_email}"></div>
         </div>
         <div class="rows">
             <input type="password" name="password" th:placeholder="#{비밀번호}">
+            <div class="error" th:if="${session.NotBlank_password != null }" th:text="${session.NotBlank_password}"></div>
+
+
         </div>
         <button type="submit" th:text="#{로그인}"></button>
+        <div class ="error" th:if="${session.globalError != null}" th:text="&{session.globalError}"></div>
     </form>
 </main>
 

@@ -5,7 +5,7 @@
 
 <main layout:fragment="content">
     <form method="post" th:action="@{/member/login}">
-        <input th:if="${redirectURL != null}" type="hidden" th:value="${redirectURL}">
+        <input th:if="${redirectURL != null}" type="hidden" name="redirectURL">
         <div class="rows">
             <input type="text" name="email" th:placeholder="#{이메일}">
         </div>

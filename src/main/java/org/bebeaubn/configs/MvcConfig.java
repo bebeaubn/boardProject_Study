@@ -10,6 +10,7 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.filter.reactive.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
@@ -22,6 +23,11 @@ public class MvcConfig implements WebMvcConfigurer {
     @Autowired
     private org.bebeaubn.commons.interceptors.commonInterceptor commonInterceptor;
 
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/")
+                .setViewName("front/main/index");
+    }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {

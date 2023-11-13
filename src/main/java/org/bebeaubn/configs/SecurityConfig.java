@@ -1,5 +1,7 @@
 package org.bebeaubn.configs;
 
+import org.bebeaubn.model.member.LoginFailureHandler;
+import org.bebeaubn.model.member.LoginSuccessHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,8 +19,8 @@ public class SecurityConfig {
             f.loginPage("/member/login")
                     .usernameParameter("email")
                     .passwordParameter("password")
-                    .successForwardUrl("/")
-                    .failureUrl("/member/login?error=true");
+                    .successHandler(new LoginSuccessHandler())
+                    .failureHandler(new LoginFailureHandler());
 
         });  //DSL
 

@@ -1,6 +1,7 @@
 package org.bebeaubn.commons;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +15,8 @@ import java.util.Objects;import java.util.ResourceBundle;
         private static ResourceBundle errorsBundle;
 
         private final HttpServletRequest request;
+
+        private final HttpSession session;
 
         static {
             validationsBundle = ResourceBundle.getBundle("messages.validations");
@@ -32,9 +35,14 @@ import java.util.Objects;import java.util.ResourceBundle;
 
 
         public boolean isMobile() {
-                //요청헤더 User-Agen
+            String device = (String) session.getAttribute("device");
+            if(device != null){
+                return device.equals("mobile");
+            }
+
             boolean isMobile = request.getHeader("User-Agent").matches
                     (".*(iPhone|iPod|iPad|BlackBerry|Android|Windows CE|LG|MOT|SAMSUNG|SonyEricsson).*");
+
 
                 return isMobile;
 

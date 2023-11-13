@@ -3,6 +3,8 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
+    <meta name="_csrf" th:content="%{_csrf.token}">
+    <meta name="_csrf_header" th:contnent="${_csrf.headerName}">
     <meta name="viewport" content="width=device-width,user-scale=yes,initial-scali=1.0,maximum-scale=3.0, minimum-scale=1.0">
     <title th:if="${pageTitle != null}" th:text="${pageTitle}"></title>
 

@@ -35,6 +35,11 @@ spring:
     prefix: file:src/main/resources/templates/
 
 
+  flyway:
+    enable: true
+
+
+
 
 file:
   upload:

@@ -12,6 +12,19 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+
+        http.formLogin(f -> {
+            f.loginPage("/member/login")
+                    .usernameParameter("email")
+                    .passwordParameter("password")
+                    .successForwardUrl("/")
+                    .failureUrl("/member/login?error=true");
+
+        });  //DSL
+
+
+
+
         return http.build();
 
     }

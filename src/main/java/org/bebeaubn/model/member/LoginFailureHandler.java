@@ -17,7 +17,7 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
 
         HttpSession session = request.getSession();
 
-        init(session);
+        Utils.loginInit(session);
 
         String email = request.getParameter("email");
         String password = request.getParameter("password");
@@ -48,7 +48,5 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
 
     }
 
-    private void init(HttpSession session){
 
-    }
 }

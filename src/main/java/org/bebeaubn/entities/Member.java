@@ -1,6 +1,7 @@
 package org.bebeaubn.entities;
 
 import lombok.Data;
+import org.bebeaubn.commons.constants.MemberType;
 import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
@@ -18,6 +19,8 @@ public class Member {
     private String userNm;
 
     private String mobile;
+
+    private MemberType mtype = MemberType.USER;
 
     private LocalDateTime regDt;
     private LocalDateTime modDt;

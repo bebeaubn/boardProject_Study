@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.bebeaubn.commons.Utils;
+import org.bebeaubn.entities.Member;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
@@ -17,7 +18,14 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
             throws IOException, ServletException {
         HttpSession session = request.getSession();
 
+
         Utils.loginInit(session);
+
+        /* 로그인 회원정보 세션 처리 - 편의 */
+
+        MemberInfo memberInfo = (MemberInfo)authentication.getPrincipal();
+        Member member = memberInfo.getMember();
+        session.setAttribute("loginMember", member);
 
 
         /*

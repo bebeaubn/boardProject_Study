@@ -23,7 +23,7 @@ public class Ex01 {
     @BeforeEach
     void init(){
         Member member = new Member();
-        member.setUserNo(1L);
+       // member.setUserNo(1L);
         member.setEmail("user01@test.org");
         member.setUserNm("사용자01");
         member.setPassword("123456");
@@ -44,7 +44,7 @@ public class Ex01 {
         Member member2 = em.find(Member.class, 1L);  //영속성 컨텍스트 -> 조회
         System.out.println(member2);
 
-        TypedQuery<Member> query = em.createQuery("SELECT m FROM Member AS m WHERE m.email LIKE :key" , Member.class);
+        TypedQuery<Member> query = em.createQuery("SELECT m FROM User AS m WHERE m.email LIKE :key" , Member.class);
         query.setParameter("key", "%user%");
         Member member3 = query.getSingleResult();
 
@@ -58,7 +58,7 @@ public class Ex01 {
     @Test
     void test1(){
         Member member = new Member();
-                member.setUserNo(1L);
+                // member.setUserNo(1L);
                 member.setEmail("user01@test.org");
                 member.setUserNm("사용자01");
                 member.setPassword("123456");
@@ -79,9 +79,14 @@ public class Ex01 {
                 em.flush();
 
                //em.remove(member);
-                em.flush();
+               // em.flush();
 
 
+
+    }
+
+    @Test
+    void test3(){
 
     }
 

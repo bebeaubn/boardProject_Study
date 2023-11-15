@@ -41,16 +41,16 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private MemberType mtype = MemberType.USER;
 
-
+    @Column(updatable = false)
     @CreationTimestamp
     private LocalDateTime regDt;
 
 
+    @Column(insertable = false)
     @UpdateTimestamp
-    private LocalDateTime modDt;
+    private LocalDateTime modD;
 
-    @Transient
-    private String tmpData;
+
 
 
 

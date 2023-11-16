@@ -1,12 +1,15 @@
 package org.bebeaubn.controllers.members;
 
+import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.bebeaubn.commons.MemberUtil;
 import org.bebeaubn.commons.Utils;
+import org.bebeaubn.entities.BoardData;
 import org.bebeaubn.entities.Member;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,10 +19,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/member")
 @RequiredArgsConstructor
+@Transactional
 public class MemberController {
 
     private final Utils utils;
     private final MemberUtil memberUtils;
+
+    private final EntityManager em;
 
     @GetMapping("/join")
     public String join() {
@@ -38,25 +44,20 @@ public class MemberController {
     @ResponseBody
     @GetMapping("/info")
     public void info() {
-        Member member = memberUtils.getMember();
+        BoardData data = BoardData.builder()
+                .subject("제목")
+                .content("내용")
+                .build();
 
-        if(memberUtils.isLogin()){
-            log.info(member.toString());
-        }
 
-        log.info("로그인 여부 : {}", memberUtils.isLogin());
+        em.persist(data);
+        em.flush();
+
+        data.setSubject("(수정)제목");
+        em.flush();
+
     }
-    /*
-    public void info(@AuthenticationPrincipal MemberInfo memberInfo) {
-        log.info(memberInfo.toString());
-    */
-    /*
-    public void info(Principal principal) {
-        String email = principal.getName();
-        log.info(email);
     }
-     */
-}
 
 
 

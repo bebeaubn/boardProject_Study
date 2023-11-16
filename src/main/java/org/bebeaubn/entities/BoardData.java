@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class BoardData extends Base {
+public class BoardData extends BaseMember {
 
     @Id
     @GeneratedValue

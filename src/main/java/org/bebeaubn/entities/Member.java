@@ -18,9 +18,10 @@ import java.time.LocalDateTime;
         @Index(name = "idx_member_userNm", columnList = "userNm"),
         @Index(name = "idx_member_mobile", columnList = "mobile")
 })
-public class Member {
+public class Member extends Base {
 
-    @Id @GeneratedValue(strategy =GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long userNo;
 
     @Column(length = 65, unique = true, nullable = false)
@@ -36,26 +37,10 @@ public class Member {
     private String mobile;
 
 
-
     @Column(length = 10, nullable = false)
     @Enumerated(EnumType.STRING)
     private MemberType mtype = MemberType.USER;
 
-    @Column(updatable = false)
-    @CreationTimestamp
-    private LocalDateTime regDt;
-
-
-    @Column(insertable = false)
-    @UpdateTimestamp
-    private LocalDateTime modD;
-
-
-
-
-
-    /*
-    @Temporal()
-    private Data data;
-*/
 }
+
+

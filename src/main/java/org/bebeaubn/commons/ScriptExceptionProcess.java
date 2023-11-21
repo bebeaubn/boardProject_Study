@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 /**
  * 예외를 자바스크립트 처리하는 공통 인터페이스
+ *여기 AlertException 오류처리 해줘야 한다
  *
  */
 public interface ScriptExceptionProcess {

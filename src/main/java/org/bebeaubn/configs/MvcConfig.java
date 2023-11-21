@@ -26,6 +26,8 @@ public class MvcConfig implements WebMvcConfigurer {
     @Autowired
     private org.bebeaubn.commons.interceptors.commonInterceptor commonInterceptor;
 
+
+    /*
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/")
@@ -37,6 +39,13 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addViewController("/admin")
                 .setViewName("/front/main/index");
     }
+
+
+     */
+
+  /** @Autowired
+    private CommonInterceptor commonInterceptor;
+    **/   //여기 부분 더 수정
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {

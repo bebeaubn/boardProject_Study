@@ -16,19 +16,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/member")
 @RequiredArgsConstructor
-public class MemberController implements commonProcess{
+public class MemberController implements commonProcess {
 
     private final Utils utils;
     private final MemberUtil memberUtil;
 
     @GetMapping("/join")
-    public String join() {@ModelAttribute RequestJoin form, Model; medel){
-        commonProcess(model, Utils.getMessage("회원가입","common");
-
-        return utils.tpl("member/join");
+    public String join() {
+        @ModelAttribute RequestJoin form, Model;
+        medel
     }
 
-    }
+}
     @GetMapping("/login")
     public String login(String redirectURL, Model model) {
         commonProcess(model,Utils.getMessage("로그인","common"));

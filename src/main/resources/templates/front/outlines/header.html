@@ -10,9 +10,6 @@
 
             <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/admin}" th:text="#{사이트관리}"></a>
 
-
-
-
         </th:block>
         <th:block sec:authorize="isAnonymous">
             <a th:href="@{/member/join}" th:text="#{회원가입}"></a>

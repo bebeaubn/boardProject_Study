@@ -17,6 +17,8 @@ import java.util.Objects;import java.util.ResourceBundle;
         private static ResourceBundle validationsBundle;
         private static ResourceBundle errorsBundle;
 
+        private static ResourceBundle commonsBundle;
+
         private final HttpServletRequest request;
 
         private final HttpSession session;
@@ -24,11 +26,20 @@ import java.util.Objects;import java.util.ResourceBundle;
         static {
             validationsBundle = ResourceBundle.getBundle("messages.validations");
             errorsBundle = ResourceBundle.getBundle("messages.errors");
+            commonsBundle = ResourceBundle.getBundle("message.commons");
         }
 
         public static String getMessage(String code, String bundleType) {
             bundleType = Objects.requireNonNullElse(bundleType, "validation");
-            ResourceBundle bundle = bundleType.equals("error") ? errorsBundle : validationsBundle;
+            ResourceBundle bundle = null;
+            if(bundleType.equals("common")){
+                bundle =commonsBundle;
+            } else if (bundleType.equals("error")){
+                bundle = errorsBundle;
+            }else {
+                bundle = validationsBundle;
+            }
+
             try {
                 return bundle.getString(code);
             } catch (Exception e) {

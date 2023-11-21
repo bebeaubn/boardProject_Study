@@ -36,8 +36,10 @@ public class commonInterceptor implements HandlerInterceptor {
 
         }
 
+        /*성공시 다른페이지에 접속했을때 다른 정보를 보여주면 안되기 때문에 session값 지우게 되게 보여주는것
+             Utils.loginInit(session); 이렇게 util쪽 정보 지워주기
 
-
+         */
 
     }
 

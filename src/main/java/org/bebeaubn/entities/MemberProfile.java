@@ -4,10 +4,9 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.ToString;
 
+@Entity
+@Data
 public class MemberProfile {
-    @Entity
-    @Data
-    public class MemberProfile {
         @Id
         @GeneratedValue
         private Long seq;
@@ -19,4 +18,4 @@ public class MemberProfile {
         @OneToOne(mappedBy = "profile")
         private Member member;
     }
-}
+

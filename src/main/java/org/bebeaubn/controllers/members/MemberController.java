@@ -39,6 +39,8 @@ public class MemberController {
         model.addAttribute("redirectURL", redirectURL);
 
         return utils.tpl("member/login");
+        // 피시버전에서 바뀌게 템플릿 연동 시켜줌 utils
+
     }
 
     @ResponseBody

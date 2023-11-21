@@ -22,7 +22,7 @@ public class AuditorAwareImpl implements AuditorAware<String> {
            email = member.getEmail();
 
         }
-
+        // 세션에 담아서 편하게 쓰기위해 담음 --> MemberUtil 거기에 사용
 
 
         return Optional.ofNullable(email);

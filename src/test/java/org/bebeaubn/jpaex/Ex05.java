@@ -1,6 +1,6 @@
 package org.bebeaubn.jpaex;
 
-import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.core.BooleanBuilder;
 import org.bebeaubn.entities.BoardData;
 import org.bebeaubn.entities.QBoardData;
 import org.bebeaubn.repositories.BoardDataRepository;
@@ -27,5 +27,29 @@ public class Ex05 {
 
 
     }
+    @Test
+    void test2() {
+        QBoardData boardData = QBoardData.boardData;
 
+        BooleanBuilder andBuilder = new BooleanBuilder();
+        BooleanBuilder orBuilder = new BooleanBuilder();
+
+        orBuilder.or(boardData.subject.contains("목"))
+                .or(boardData.content.contains("용"));
+
+        andBuilder.and(orBuilder)
+                .and(boardData.seq.in(2,4,6,8));
+
+
+        /*
+        BooleanBuilder andBuilder = new BooleanBuilder();
+        andBuilder.and(boardData.subject.contains("목"))
+                .and(boardData.content.contains("용"))
+                .and(boardData.seq.in(2, 4, 6, 8));
+        */
+        List<BoardData> items = (List<BoardData>)repository.findAll(andBuilder);
+        items.stream().forEach(System.out::println);
+    }
 }
+
+

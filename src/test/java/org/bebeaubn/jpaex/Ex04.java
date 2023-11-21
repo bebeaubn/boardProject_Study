@@ -68,28 +68,27 @@ public class Ex04 {
         System.out.println(data);
 
     }
-    @Test
-    void test4() {
-        List <BoardData> items = repository
-                .findBySubjectContainingOrContentContainingOrderBySeqDesc("목","용");
-        items.stream().forEach(System.out::println);
 
+
+    @Test
+    void test5() {
+        Pageable pageable = PageRequest.of(1, 3, Sort.by(desc("seq")));
+        LocalDateTime now = LocalDateTime.now();
+
+        List<BoardData> items = repository.findByCreatedAtBetween(now.minusDays(1), now.plusDays(1), pageable);    //여기부분 애러 잡기
+
+        items.stream().forEach(System.out::println);
     }
 
     @Test
-    void test5(){
-        Pageable pageable = PageRequest.of(1,3, Sort.by(desc("req")));
-        LocalDateTime now = LocalDateTime.now();
-
-        List<BoardData> items =repository.findByCreatedAtBetween(now.minusDays(1), now.plusDays(1), pageable);
-
+    void test4() {
+        List<BoardData> items = repository
+                .findBySubjectContainingOrContentContainingOrderBySeqDesc("목", "용");
         items.stream().forEach(System.out::println);
-
-
-
 
     }
 }
+
 
 
 

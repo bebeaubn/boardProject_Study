@@ -22,7 +22,7 @@ public class MemberController implements commonProcess{
     private final MemberUtil memberUtil;
 
     @GetMapping("/join")
-    public String join() {@ModelAttribute RequestJoin form, Model medel){
+    public String join() {@ModelAttribute RequestJoin form, Model; medel){
         commonProcess(model, Utils.getMessage("회원가입","common");
 
         return utils.tpl("member/join");

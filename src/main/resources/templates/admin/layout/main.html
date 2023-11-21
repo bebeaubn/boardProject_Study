@@ -28,7 +28,13 @@
     <script th:each="file : ${addScript}" th:src="@{/admin/js/{file}.js(file=${file})}"></script>
 
     <th:block layout:fragment="addScript"></th:block>
-
+    <main>
+        <aside th:replace="~{admin/outlines/_side::menu}"></aside>
+        <section>
+            <th:block th:replace="~{admin/commons/_submenu::menus}"></th:block>
+            <section layout:fragment="content"></section>
+        </section>
+    </main>
 </head>
 <body>
 <header th:replace="~{admin/header::common}"></header>

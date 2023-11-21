@@ -53,7 +53,7 @@ public class SecurityConfig {
         //인가설정 - 접근통제 시작
         http.authorizeHttpRequests(c -> {
             c.requestMatchers("/mypage/**").authenticated() // 회원 전용(로그인한 회원만 접근 가능)
-                    .requestMatchers("/admin/**").hasAuthority("ADMIN") // 관리자 권한만 접근
+                   // .requestMatchers("/admin/**").hasAuthority("ADMIN") // 관리자 권한만 접근,주석처리하면 권환없어도 가능하다
                     .requestMatchers(   "/front/css/**",
                             "/front/js/**",
                             "/front/images/**",

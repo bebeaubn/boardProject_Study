@@ -1,30 +1,50 @@
 package org.bebeaubn.commons.interceptors;
 
-
+import com.fasterxml.jackson.core.type.TypeReference;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-  //여기 부분 수정 해줘야함  config에 파일 생성해줘야 한다
-import org.bebeaubn.commons.exceptions.AlertBackException;
-import org.bebeaubn.commons.exceptions.AlertException;
+import lombok.RequiredArgsConstructor;
+import org.bebeaubn.commons.configs.ConfigInfoService;
 import org.springframework.stereotype.Component;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.HandlerInterceptor;
 
-/**
- * 예외를 자바스크립트 처리하는 공통 인터페이스
- * 여기 부분 다시 봐줘야 한다
- */
-public interface ScriptExceptionProcess {
-    @ExceptionHandler(AlertException.class)
-    default String scriptHandler(AlertException e, Model model, HttpServletResponse response) {
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
-        response.setStatus(e.getStatus().value());
-        String script = String.format("alert('%s');", e.getMessage());
-        if (e instanceof AlertBackException) {
-            script += "history.back();";
+
+    /**
+     * 사이트 설정 유지
+     *
+     */
+    @Component("siteConf")
+    @RequiredArgsConstructor
+    public class SiteConfigInterceptor implements HandlerInterceptor {
+
+        private final ConfigInfoService infoService;
+        private final HttpServletRequest request;
+
+        @Override
+        public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+            String URI = request.getRequestURI();
+            List<String> excludes = Arrays.asList(".css", ".js", ".png", ".jpg", ".jpeg", ".pdf", ".gif", ".xls", ".xlsx");
+            boolean matched = excludes.stream().anyMatch(URI::contains);
+
+            if (matched) {
+                return true;
+            }
+
+            /** 사이트 설정 조회 */
+            Map<String, String> siteConfigs = infoService.get("config", new TypeReference<Map<String, String>>() {});
+            request.setAttribute("siteConfig", siteConfigs);
+            return true;
         }
 
-        model.addAttribute("script", script);
+        public String get(String name) {
+            Map<String, String> siteConfig = (Map<String, String>)request.getAttribute("siteConfig");
+            String value = siteConfig == null ? "" : siteConfig.get(name);
 
-        return "commons/_execute_script";
+            return value;
+        }
     }
-}
+

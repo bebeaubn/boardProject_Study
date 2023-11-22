@@ -3,43 +3,43 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
-    <meta name="_csrf" th:content="%{_csrf.token}">
-    <meta name="_csrf_header" th:contnent="${_csrf.headerName}">
-    <title th:if="${pageTitle != null}" th:text="${pageTitle}"></title>
-<!-- 전체 공유 부분 -->
-    <link rel="stylesheet" type="text/css" th:href="@{/common/css/style.css}">
-    <link rel="stylesheet" type="text/css" th:each="file : ${addCommonCss}"
-          th:href="@{/front/css/{file}.css(file=${file})}">
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+    <meta name="description" th:content="${@siteConf.get('siteDescription')}">
+    <title>
+        <th:block th:if="${pageTitle != null}" th:text="${pageTitle + ' ::'}"></th:block>
+        <th:block th:text="${@siteConf.get('siteTitle')}"></th:block>
+    </title>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 
-<!--관리자 공용 -->
-    <link rel="stylesheet" type="text/css" th:href="@{/admin/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/common/css/style.css?v={v}(v=${@siteConf.get('cssJsVersion')})}">
+    <link rel="stylesheet" type="text/css" th:each="file : ${addCommonCss}"
+          th:href="@{/common/css/{file}.css?v={v}(file=${file},v=${@siteConf.get('cssJsVersion')})}">
+
+    <link rel="stylesheet" type="text/css" th:href="@{/admin/css/style.css?v={v}(v=${@siteConf.get('cssJsVersion')})}">
     <link rel="stylesheet" type="text/css" th:each="file : ${addCss}"
-          th:href="@{/admin/css/{file}.css(file=${file})}">
+          th:href="@{/admin/css/{file}.css?v={v}(file=${file}, v=${@siteConf.get('cssJsVersion')})}">
 
     <th:block layout:fragment="addCss"></th:block>
 
-    <!-- 전제 공용 , common -->
-    <script th:src="@{/front/js/common.js}"></script>
-    <script th:each="file : ${addCommonScript}" th:src="@{/common/js/{file}.js(file=${file})}"></script>
+    <script th:src="@{/common/js/common.js}"></script>
+    <script th:each="file : ${addCommonScript}" th:src="@{/common/js/{file}.js?v={v}(file=${file}, v=${@siteConf.get('cssJsVersion')})}"></script>
 
-
-    <!-- 관리자 공용 , admin -->
     <script th:src="@{/admin/js/common.js}"></script>
-    <script th:each="file : ${addScript}" th:src="@{/admin/js/{file}.js(file=${file})}"></script>
+    <script th:each="file : ${addScript}" th:src="@{/admin/js/{file}.js?v={v}(file=${file},v=${@siteConf.get('cssJsVersion')})}"></script>
 
     <th:block layout:fragment="addScript"></th:block>
-    <main>
-        <aside th:replace="~{admin/outlines/_side::menu}"></aside>
-        <section>
-            <th:block th:replace="~{admin/commons/_submenu::menus}"></th:block>
-            <section layout:fragment="content"></section>
-        </section>
-    </main>
+
 </head>
 <body>
-<header th:replace="~{admin/header::common}"></header>
-<main layout:fragment="content"></main>
-<footer th:replace="~{admin/footer::common}"></footer>
+<header th:replace="~{admin/outlines/header::common}"></header>
+<main>
+    <aside th:replace="~{admin/outlines/_side::menu}"></aside>
+    <section>
+        <th:block th:replace="~{admin/commons/_submenu::menus}"></th:block>
+        <section layout:fragment="content"></section>
+    </section>
+</main>
 <iframe name="ifrmProcess" class="dn"></iframe>
 </body>
 </html>

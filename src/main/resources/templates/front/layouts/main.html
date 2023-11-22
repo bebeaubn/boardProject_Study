@@ -3,31 +3,31 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
-    <!-- 여기 부분 구성 -->
-    <meta name="_csrf" th:content="%{_csrf.token}">
-    <meta name="_csrf_header" th:contnent="${_csrf.headerName}">
-    <!-- 여기 까지 -->
-    <title th:if="${pageTitle != null}" th:text="${pageTitle}"></title>
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+    <meta name="description" th:content="${@siteConf.get('siteDescription')}">
+    <title>
+        <th:block th:if="${pageTitle != null}" th:text="${pageTitle + ' ::'}"></th:block>
+        <th:block th:text="${@siteConf.get('siteTitle')}"></th:block>
+    </title>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 
-    <link rel="stylesheet" type="text/css" th:href="@{/common/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/common/css/style.css?v={v}(v=${@siteConf.get('cssJsVersion')})}">
     <link rel="stylesheet" type="text/css" th:each="file : ${addCommonCss}"
-          th:href="@{/front/css/{file}.css(file=${file})}">
+          th:href="@{/common/css/{file}.css?v={v}(file=${file},v=${@siteConf.get('cssJsVersion')})}">
 
-
-    <link rel="stylesheet" type="text/css" th:href="@{/front/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/front/css/style.css?v={v}(v=${@siteConf.get('cssJsVersion')})}">
     <link rel="stylesheet" type="text/css" th:each="file : ${addCss}"
-          th:href="@{/front/css/{file}.css(file=${file})}">
+          th:href="@{/front/css/{file}.css?v={v}(file=${file}, v=${@siteConf.get('cssJsVersion')})}">
+
 
     <th:block layout:fragment="addCss"></th:block>
 
-    <!-- 전제 공용 , common -->
-    <script th:src="@{/front/js/common.js}"></script>
-    <script th:each="file : ${addCommonScript}" th:src="@{/common/js/{file}.js(file=${file})}"></script>
+    <script th:src="@{/common/js/common.js}"></script>
+    <script th:each="file : ${addCommonScript}" th:src="@{/common/js/{file}.js?v={v}(file=${file}, v=${@siteConf.get('cssJsVersion')})}"></script>
 
-
-    <!-- 프론트 공용 , front -->
     <script th:src="@{/front/js/common.js}"></script>
-    <script th:each="file : ${addScript}" th:src="@{/front/js/{file}.js(file=${file})}"></script>
+    <script th:each="file : ${addScript}" th:src="@{/front/js/{file}.js?v={v}(file=${file},v=${@siteConf.get('cssJsVersion')})}"></script>
 
     <th:block layout:fragment="addScript"></th:block>
 
@@ -36,6 +36,6 @@
 <header th:replace="~{front/outlines/header::common}"></header>
 <main layout:fragment="content"></main>
 <footer th:replace="~{front/outlines/footer::common}"></footer>
-<iframe name="ifrmProcess" class="dn"></iframe>     <!-- 이부분 설정을 풀어줘야하는데 응답헤더로 풀어줌  같은출처는 풀어줘야함-->
+<iframe name="ifrmProcess" class="dn"></iframe>
 </body>
 </html>

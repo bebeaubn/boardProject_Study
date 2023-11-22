@@ -1,6 +1,6 @@
 package org.bebeaubn.configs;
 
-import org.bebeaubn.commons.interceptors.commonInterceptor;
+import org.bebeaubn.commons.interceptors.SiteConfigInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.MessageSource;
@@ -9,10 +9,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.web.filter.reactive.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
@@ -43,13 +41,18 @@ public class MvcConfig implements WebMvcConfigurer {
 
      */
 
-  /** @Autowired
+    @Autowired
     private CommonInterceptor commonInterceptor;
-    **/   //여기 부분 더 수정
+
+  @Autowired
+   private SiteConfigInterceptor siteConfigInterceptor;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(commonInterceptor)
+                .addPathPatterns("/**");
+
+        registry.addInterceptor(siteConfigInterceptor)
                 .addPathPatterns("/**");
 
 

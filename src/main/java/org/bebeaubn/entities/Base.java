@@ -1,5 +1,6 @@
 package org.bebeaubn.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
@@ -16,7 +17,7 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 
 public abstract class Base {
-
+    @JsonFormat(pattern = "yyyy-mm-hh")
     @Column(updatable = false)
     @CreatedDate
     private LocalDateTime createdAt;

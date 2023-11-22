@@ -47,8 +47,8 @@ import java.util.Objects;import java.util.ResourceBundle;
             }
         }
 
-        public static int getNumber(int page, int i) {
-        }
+       // public static int getNumber(int page, int i) {
+        //}   //여기 오류
 
 
         public boolean isMobile() {

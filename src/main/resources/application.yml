@@ -17,6 +17,7 @@ spring:
   jpa:
     properties:
       hibernate:
+        globally_quoted_identifiers: true
         # 실행되는 쿼리를 콘솔에 출력
         show_sql: true
         format_sql: true

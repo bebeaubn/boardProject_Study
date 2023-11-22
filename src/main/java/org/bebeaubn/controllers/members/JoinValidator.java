@@ -1,8 +1,12 @@
 package org.bebeaubn.controllers.members;
 
+
+
 import lombok.RequiredArgsConstructor;
 import org.bebeaubn.repositories.MemberRepository;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 
 /**
  * 회원 가입 추가 유효성 검사

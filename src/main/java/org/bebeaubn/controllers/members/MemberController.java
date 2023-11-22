@@ -28,6 +28,8 @@ public class MemberController implements commonProcess {
     }
 
 }
+
+
     @GetMapping("/login")
     public String login(String redirectURL, Model model) {
         commonProcess(model,Utils.getMessage("로그인","common"));
